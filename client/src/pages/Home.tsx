@@ -37,8 +37,9 @@ export default function Home() {
       {/* Navigation */}
       <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-stone-200">
         <div className="container flex items-center justify-between h-16">
-          <div className="text-xl font-bold text-stone-900">
-            <span className="text-amber-600">C</span>
+          <div className="text-lg font-bold text-stone-900">
+            <span className="text-amber-600">Cătălina</span>
+            <span className="text-stone-900"> Pană</span>
           </div>
           <div className="hidden md:flex gap-8 text-sm font-medium text-stone-700">
             <a href="#" className="hover:text-amber-600 transition">
