@@ -842,6 +842,8 @@ export default function Home() {
                 <li>
                   <a
                     href="https://www.instagram.com/catalinabusinessonline/"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="hover:text-amber-600 transition"
                   >
                     @catalinabusinessonline
