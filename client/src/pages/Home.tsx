@@ -800,8 +800,9 @@ export default function Home() {
         <div className="container">
           <div className="grid md:grid-cols-4 gap-12 mb-12">
             <div>
-              <div className="text-2xl font-bold text-white mb-4">
-                <span className="text-amber-600">C</span>
+              <div className="text-lg font-bold text-white mb-4">
+                <span className="text-amber-600">Cătălina</span>
+                <span className="text-stone-300"> Pană</span>
               </div>
               <p className="text-sm">
                 AI, produse digitale și creștere organică pentru începătorii din
