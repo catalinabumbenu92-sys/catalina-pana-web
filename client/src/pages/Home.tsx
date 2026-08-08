@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import {
@@ -6,7 +7,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { CheckCircle2, Quote } from "lucide-react";
+import { CheckCircle2, Quote, Menu, X, ChevronDown } from "lucide-react";
 
 /**
  * Cătălina Pană — Business online cu AI și produse digitale
@@ -20,6 +21,17 @@ import { CheckCircle2, Quote } from "lucide-react";
  */
 
 export default function Home() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [expandedMenu, setExpandedMenu] = useState<string | null>(null);
+
+  const toggleMenu = (menu: string) => {
+    setExpandedMenu(expandedMenu === menu ? null : menu);
+  };
+
+  const handleCTAClick = (url: string) => {
+    window.open(url, '_blank', 'noopener,noreferrer');
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-stone-50 via-stone-50 to-stone-100">
       {/* Navigation */}
@@ -42,14 +54,160 @@ export default function Home() {
               Resurse
             </a>
           </div>
-          <Button
-            className="bg-stone-900 hover:bg-stone-800 text-white"
-            size="sm"
+          <div className="hidden md:block">
+            <Button
+              className="bg-stone-900 hover:bg-stone-800 text-white"
+              size="sm"
+              onClick={() => handleCTAClick('https://stan.store/CatalinaPana/p/primul-business-online-cu-ai')}
+            >
+              Începe gratuit
+            </Button>
+          </div>
+          {/* Mobile Menu Button */}
+          <button
+            className="md:hidden p-2 text-stone-900"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
-            Începe gratuit
-          </Button>
+            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
         </div>
       </nav>
+
+      {/* Mobile Menu */}
+      {mobileMenuOpen && (
+        <div className="md:hidden bg-white border-b border-stone-200 shadow-lg">
+          <div className="container py-4 space-y-2">
+            {/* Gratuit Section */}
+            <div className="border border-stone-200 rounded-lg overflow-hidden">
+              <button
+                onClick={() => toggleMenu('gratuit')}
+                className="w-full px-4 py-3 flex items-center justify-between hover:bg-stone-50 transition"
+              >
+                <span className="font-semibold text-stone-900">Gratuit</span>
+                <ChevronDown
+                  size={20}
+                  className={`text-amber-600 transition-transform ${
+                    expandedMenu === 'gratuit' ? 'rotate-180' : ''
+                  }`}
+                />
+              </button>
+              {expandedMenu === 'gratuit' && (
+                <div className="bg-stone-50 px-4 py-3 border-t border-stone-200 space-y-3">
+                  <p className="text-sm text-stone-700 font-medium">Ghidul gratuit cu 14 zile de acțiune</p>
+                  <Button
+                    className="w-full bg-stone-900 hover:bg-stone-800 text-white text-sm"
+                    onClick={() => handleCTAClick('https://stan.store/CatalinaPana/p/primul-business-online-cu-ai')}
+                  >
+                    Descarcă acum
+                  </Button>
+                </div>
+              )}
+            </div>
+
+            {/* Program Section */}
+            <div className="border border-stone-200 rounded-lg overflow-hidden">
+              <button
+                onClick={() => toggleMenu('program')}
+                className="w-full px-4 py-3 flex items-center justify-between hover:bg-stone-50 transition"
+              >
+                <span className="font-semibold text-stone-900">Program</span>
+                <ChevronDown
+                  size={20}
+                  className={`text-amber-600 transition-transform ${
+                    expandedMenu === 'program' ? 'rotate-180' : ''
+                  }`}
+                />
+              </button>
+              {expandedMenu === 'program' && (
+                <div className="bg-stone-50 px-4 py-3 border-t border-stone-200 space-y-3">
+                  <div>
+                    <p className="text-sm font-semibold text-stone-900 mb-2">Primul meu Business Online cu AI</p>
+                    <p className="text-xs text-stone-600 mb-3">€147 · 6 săptămâni · 15 module video</p>
+                    <Button
+                      className="w-full bg-amber-600 hover:bg-amber-700 text-white text-sm"
+                      onClick={() => handleCTAClick('https://stan.store/CatalinaPana/p/primul-business-online-cu-aiprogram-complet')}
+                    >
+                      Accesează programul
+                    </Button>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Mentorat Section */}
+            <div className="border border-stone-200 rounded-lg overflow-hidden">
+              <button
+                onClick={() => toggleMenu('mentorat')}
+                className="w-full px-4 py-3 flex items-center justify-between hover:bg-stone-50 transition"
+              >
+                <span className="font-semibold text-stone-900">Mentorat</span>
+                <ChevronDown
+                  size={20}
+                  className={`text-amber-600 transition-transform ${
+                    expandedMenu === 'mentorat' ? 'rotate-180' : ''
+                  }`}
+                />
+              </button>
+              {expandedMenu === 'mentorat' && (
+                <div className="bg-stone-50 px-4 py-3 border-t border-stone-200 space-y-3">
+                  <div>
+                    <p className="text-sm font-semibold text-stone-900 mb-2">AI Business Accelerator</p>
+                    <p className="text-xs text-stone-600 mb-2">€599 · 8 săptămâni · 1 la 1 cu Cătălina</p>
+                    <ul className="text-xs text-stone-600 space-y-1 mb-3 list-disc list-inside">
+                      <li>8 sesiuni live (1 oră fiecare)</li>
+                      <li>2 review-uri pe săptămână</li>
+                      <li>Feedback personalizat</li>
+                    </ul>
+                    <Button
+                      className="w-full bg-stone-900 hover:bg-stone-800 text-white text-sm"
+                      onClick={() => handleCTAClick('https://stan.store/CatalinaPana/p/mentorat-ai-business-accelerator')}
+                    >
+                      Alege mentoratul
+                    </Button>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Resurse Section */}
+            <div className="border border-stone-200 rounded-lg overflow-hidden">
+              <button
+                onClick={() => toggleMenu('resurse')}
+                className="w-full px-4 py-3 flex items-center justify-between hover:bg-stone-50 transition"
+              >
+                <span className="font-semibold text-stone-900">Resurse</span>
+                <ChevronDown
+                  size={20}
+                  className={`text-amber-600 transition-transform ${
+                    expandedMenu === 'resurse' ? 'rotate-180' : ''
+                  }`}
+                />
+              </button>
+              {expandedMenu === 'resurse' && (
+                <div className="bg-stone-50 px-4 py-3 border-t border-stone-200 space-y-2">
+                  <a
+                    href="https://www.instagram.com/catalinabusinessonline/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block text-sm text-amber-600 hover:text-amber-700 font-medium"
+                  >
+                    Instagram @catalinabusinessonline
+                  </a>
+                  <p className="text-xs text-stone-600 pt-2">Urmărește pentru sfaturi zilnice și inspirație</p>
+                </div>
+              )}
+            </div>
+
+            {/* Mobile CTA Button */}
+            <Button
+              className="w-full bg-stone-900 hover:bg-stone-800 text-white mt-4"
+              onClick={() => handleCTAClick('https://stan.store/CatalinaPana/p/primul-business-online-cu-ai')}
+            >
+              Începe gratuit
+            </Button>
+          </div>
+        </div>
+      )}
 
       {/* Hero Section */}
       <section className="relative py-16 md:py-24 overflow-hidden">
@@ -76,7 +234,7 @@ export default function Home() {
                 <Button
                   size="lg"
                   className="bg-stone-900 hover:bg-stone-800 text-white"
-                  onClick={() => window.location.href = 'https://stan.store/CatalinaPana/p/primul-business-online-cu-ai'}
+                  onClick={() => handleCTAClick('https://stan.store/CatalinaPana/p/primul-business-online-cu-ai')}
                 >
                   Descarcă ghidul gratuit
                 </Button>
@@ -110,7 +268,7 @@ export default function Home() {
             <div className="relative">
               <div className="aspect-square rounded-2xl overflow-hidden shadow-2xl">
                 <img
-                  src="/manus-storage/1785618775624_ceec3920.png"
+                  src="/manus-storage/Gemini_Generated_Image_1j5bkp1j5bkp1j5b_3b65a45d.png"
                   alt="Cătălina Pană"
                   className="w-full h-full object-cover"
                 />
@@ -299,7 +457,7 @@ export default function Home() {
 
               <Button 
                 className="w-full bg-stone-900 hover:bg-stone-800 text-white"
-                onClick={() => window.location.href = 'https://stan.store/CatalinaPana/p/primul-business-online-cu-ai'}
+                onClick={() => handleCTAClick('https://stan.store/CatalinaPana/p/primul-business-online-cu-ai')}
               >
                 Obține ghidul gratuit
               </Button>
@@ -359,7 +517,7 @@ export default function Home() {
 
               <Button 
                 className="w-full bg-amber-600 hover:bg-amber-700 text-white"
-                onClick={() => window.location.href = 'https://stan.store/CatalinaPana/p/primul-business-online-cu-aiprogram-complet'}
+                onClick={() => handleCTAClick('https://stan.store/CatalinaPana/p/primul-business-online-cu-aiprogram-complet')}
               >
                 Accesează programul
               </Button>
@@ -414,7 +572,7 @@ export default function Home() {
 
               <Button
                 className="w-full bg-stone-900 hover:bg-stone-800 text-white"
-                onClick={() => window.location.href = 'https://stan.store/CatalinaPana/p/mentorat-ai-business-accelerator'}
+                onClick={() => handleCTAClick('https://stan.store/CatalinaPana/p/mentorat-ai-business-accelerator')}
               >
                 Alege mentoratul
               </Button>
@@ -592,7 +750,7 @@ export default function Home() {
               </p>
               <Button 
                 className="bg-stone-900 hover:bg-stone-800 text-white"
-                onClick={() => window.location.href = 'https://stan.store/CatalinaPana/p/primul-business-online-cu-ai'}
+                onClick={() => handleCTAClick('https://stan.store/CatalinaPana/p/primul-business-online-cu-ai')}
               >
                 Descarcă ghidul gratuit
               </Button>
@@ -606,7 +764,7 @@ export default function Home() {
               </p>
               <Button 
                 className="w-full bg-amber-600 hover:bg-amber-700 text-white"
-                onClick={() => window.location.href = 'https://stan.store/CatalinaPana/p/mentorat-ai-business-accelerator'}
+                onClick={() => handleCTAClick('https://stan.store/CatalinaPana/p/mentorat-ai-business-accelerator')}
               >
                 Vezi mentoratul
               </Button>
@@ -629,7 +787,7 @@ export default function Home() {
           <Button
             size="lg"
             className="bg-amber-600 hover:bg-amber-700 text-white"
-            onClick={() => window.location.href = 'https://stan.store/CatalinaPana/p/primul-business-online-cu-ai'}
+            onClick={() => handleCTAClick('https://stan.store/CatalinaPana/p/primul-business-online-cu-ai')}
           >
             Descarcă ghidul
           </Button>
