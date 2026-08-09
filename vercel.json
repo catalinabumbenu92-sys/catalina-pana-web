@@ -1,25 +1,27 @@
 {
-  "buildCommand": "pnpm run build",
+  "version": 2,
+  "buildCommand": "pnpm install && pnpm run build",
   "outputDirectory": "dist",
-  "framework": "nodejs",
+  "framework": null,
   "nodeVersion": "22.x",
   "env": {
     "NODE_ENV": "production"
   },
   "functions": {
     "dist/index.js": {
-      "memory": 512,
-      "maxDuration": 60
+      "memory": 1024,
+      "maxDuration": 60,
+      "runtime": "nodejs22.x"
     }
   },
-  "routes": [
+  "rewrites": [
     {
-      "src": "/api/(.*)",
-      "dest": "/dist/index.js"
+      "source": "/api/(.*)",
+      "destination": "/dist/index.js"
     },
     {
-      "src": "/(.*)",
-      "dest": "/dist/public/index.html"
+      "source": "/(.*)",
+      "destination": "/dist/public/index.html"
     }
   ]
 }
