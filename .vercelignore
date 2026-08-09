@@ -13,6 +13,5 @@ drizzle
 vitest.config.ts
 tsconfig.json
 vite.config.ts
-patches
 .prettierignore
 .prettierrc
